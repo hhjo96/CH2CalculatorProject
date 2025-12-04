@@ -29,7 +29,7 @@ public class Calculator {
     }
 
     public static int calc(int num1, int num2, String operator) {
-        int result = -1;
+        int result = 0;
         switch (operator) {
             case "+":
                 result = num1 + num2;
