@@ -11,7 +11,6 @@ public class App {
         int result = 0;
 
         String operator = "";
-        String message = ""; // 결과 식을 String으로 저장
         String exitMessage = ""; // exit인지를 입력받을 변수
 
         Calculator calculator = new Calculator();
@@ -53,15 +52,14 @@ public class App {
 
 //        System.out.println("operator = " + operator);
 
-            //계산하기. 추후 결과를 저장해야 하므로 message 에 저장했다.
+            //계산하기.
             result = calculator.calc(number1, number2, operator);
 
             //나누기 0의 경우 따로 처리
             if (operator.equals("/") && number2 == 0) {
                 continue;
             } else {
-                message = number1 + operator + number2 + " = " + result;
-                System.out.println(message);
+                System.out.println(calculator.message);
             }
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
