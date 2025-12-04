@@ -19,7 +19,37 @@ public class Calculator {
         String operator = sc.nextLine();
         operator = operator.charAt(0)+ "";
 
-        System.out.println("operator = " + operator);
+//        System.out.println("operator = " + operator);
 
+        //계산하기. 추후 결과를 저장해야 하므로 message 에 저장했다.
+        int result = calc(number1, number2, operator);
+        String message = number1 + operator + number2 + " = " + result;
+        System.out.println(message);
+
+    }
+
+    public static int calc(int num1, int num2, String operator) {
+        int result = 0;
+        switch (operator) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                try {
+                    result = num1 / num2;
+                    throw new ArithmeticException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            default: result = 0;
+        }
+        return result;
     }
 }
