@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -59,8 +61,9 @@ public class App {
             if (operator.equals("/") && number2 == 0) {
                 continue;
             } else {
-                System.out.println(calculator.message);
+                System.out.println("현재까지의 결과 값: " + calculator.getResultList());
             }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
             if (exitMessage.equalsIgnoreCase("exit")) {

@@ -6,8 +6,29 @@ import java.util.List;
 
 public class Calculator {
 
-    String message = "";
-    List<String> resultList = new ArrayList<String>();
+    private String message = "";
+    private List<String> resultList = new ArrayList<String>();
+
+    public Calculator() {
+
+    }
+
+    public List<String> getResultList() {
+        return resultList;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setResultList(List<String> resultList) {
+        this.resultList = resultList;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 
     public int calc(int num1, int num2, String operator) {
         int result = -1;
