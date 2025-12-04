@@ -14,6 +14,7 @@ public class App {
 
         String operator = "";
         String exitMessage = ""; // exit인지를 입력받을 변수
+        String deleteMessage = ""; // 가장 먼저 저장된 데이터 삭제할지 입력받을 변수
 
         Calculator calculator = new Calculator();
 
@@ -64,12 +65,23 @@ public class App {
                 System.out.println("현재까지의 결과 값: " + calculator.getResultList());
             }
 
+            System.out.println("가장 먼저 저장된 값을 삭제하시겠습니까? (y or n)");
+            deleteMessage = sc.nextLine();
+            if (deleteMessage.equalsIgnoreCase("y")) {
+                calculator.removeResultList();
+
+                System.out.println("가장 먼저 저장된 값을 삭제했습니다.");
+                System.out.println("현재까지의 결과 값: " + calculator.getResultList());
+            }
+
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
             if (exitMessage.equalsIgnoreCase("exit")) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
+
 
         }
 
