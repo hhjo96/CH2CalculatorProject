@@ -23,13 +23,19 @@ public class Calculator {
 
         //계산하기. 추후 결과를 저장해야 하므로 message 에 저장했다.
         int result = calc(number1, number2, operator);
-        String message = number1 + operator + number2 + " = " + result;
-        System.out.println(message);
+
+        //나누기 0의 경우 따로 처리
+        if(operator.equals("/") && number2 == 0){
+            System.out.println("프로그램을 종료합니다. ");
+        } else {
+            String message = number1 + operator + number2 + " = " + result;
+            System.out.println(message);
+        }
 
     }
 
     public static int calc(int num1, int num2, String operator) {
-        int result = 0;
+        int result = -1;
         switch (operator) {
             case "+":
                 result = num1 + num2;
@@ -42,8 +48,11 @@ public class Calculator {
                 break;
             case "/":
                 try {
-                    result = num1 / num2;
-                    throw new ArithmeticException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
+                    if (num2 == 0){
+                        throw new ArithmeticException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
+                    } else {
+                        result = num1 / num2;
+                    }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
