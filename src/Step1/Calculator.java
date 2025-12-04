@@ -10,6 +10,8 @@ public class Calculator {
         int number1 = 0;
         int number2 = 0;
         int result = 0;
+
+        String operator = "";
         String message = ""; // 결과 식을 String으로 저장
         String exitMessage = ""; // exit인지를 입력받을 변수
 
@@ -17,17 +19,36 @@ public class Calculator {
 
             //숫자 입력받기
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            number1 = sc.nextInt();
+            try {
+                number1 = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("숫자만 입력해주세요.");
+                //엔터 지우기
+                sc.nextLine();
+                continue;
+            }
 
             System.out.print("두 번째 숫자를 입력하세요: ");
-            number2 = sc.nextInt();
+            try {
+                number2 = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("숫자만 입력해주세요.");
+                //엔터 지우기
+                sc.nextLine();
+                continue;
+            }
 
             //엔터 지우기
             sc.nextLine();
 
             System.out.print("사칙연산 기호를 입력하세요: ");
-            String operator = sc.nextLine();
+            operator = sc.nextLine();
             operator = operator.charAt(0) + "";
+
+            if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
+                System.out.println("정의된 연산자는 + - * / 입니다. 해당 연산자 중에서 입력해주세요.");
+                continue;
+            }
 
 //        System.out.println("operator = " + operator);
 
@@ -43,7 +64,7 @@ public class Calculator {
             }
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
-            if (exitMessage.equals("exit")) {
+            if (exitMessage.equalsIgnoreCase("exit")) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
