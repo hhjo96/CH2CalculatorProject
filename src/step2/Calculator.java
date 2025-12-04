@@ -61,4 +61,8 @@ public class Calculator {
 
         return result;
     }
+
+    public void removeResultList() {
+        resultList.remove(0);
+    }
 }
