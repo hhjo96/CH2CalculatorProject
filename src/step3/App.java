@@ -1,4 +1,4 @@
-package dojun;
+package step3;
 
 import java.util.Scanner;
 
@@ -9,9 +9,10 @@ public class App {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int number1 = 0;
-        int number2 = 0;
-        int result = 0;
+
+//        int number1 = 0;
+//        int number2 = 0;
+        double result = 0;
 
         String operator = "";
         String exitMessage = ""; // exit인지를 입력받을 변수
@@ -25,7 +26,7 @@ public class App {
             //숫자 입력받기
             System.out.print("첫 번째 숫자를 입력하세요: ");
             try {
-                number1 = sc.nextInt();
+                calculator.number1 = sc.nextDouble();
             } catch (Exception e) {
                 printOnlyNumbersAndDeleteEnters(sc);
                 continue;
@@ -33,7 +34,7 @@ public class App {
 
             System.out.print("두 번째 숫자를 입력하세요: ");
             try {
-                number2 = sc.nextInt();
+                calculator.number2 = sc.nextDouble();
             } catch (Exception e) {
                 printOnlyNumbersAndDeleteEnters(sc);
                 continue;
@@ -52,10 +53,10 @@ public class App {
             }
 
             //계산하기.
-            result = calculator.calc(number1, number2, operator);
+            result = calculator.calc(calculator.number1, calculator.number2, operator);
 
             //나누기 0의 경우 따로 처리
-            if (operator.equals("/") && number2 == 0) {
+            if (operator.equals("/") && Double.compare(calculator.number2.doubleValue(), 0) == 0) {
                 continue;
             } else {
                 System.out.println("현재까지의 결과 값: " + calculator.getResultList());
@@ -78,7 +79,7 @@ public class App {
 
 
         }
-
+        sc.close();
     }
 
     //메인 함수를 깔끔하게 만들기 위해 별도의 함수로 만들어 보았다.
