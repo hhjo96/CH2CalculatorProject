@@ -61,7 +61,13 @@ public class App {
                 System.out.println("현재까지의 결과 값: " + calculator.getResultList());
             }
 
-            printYNRemoveList(sc, calculator);
+            System.out.println("가장 먼저 저장된 값을 삭제하시겠습니까? (y or n)");
+            String deleteMessage = sc.nextLine(); // 가장 먼저 저장된 데이터 삭제할지 입력받을 변수
+            if (deleteMessage.equalsIgnoreCase("y")) {
+                calculator.removeResultList();
+                printRemoveList(calculator);
+            }
+
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
@@ -95,13 +101,7 @@ public class App {
         System.out.println("입니다. 해당 연산자 중에서 입력해주세요.");
     }
 
-    public static void printYNRemoveList(Scanner sc, Calculator calculator){
-
-        System.out.println("가장 먼저 저장된 값을 삭제하시겠습니까? (y or n)");
-        String deleteMessage = sc.nextLine(); // 가장 먼저 저장된 데이터 삭제할지 입력받을 변수
-        if (deleteMessage.equalsIgnoreCase("y")) {
-            calculator.removeResultList();
-        }
+    public static void printRemoveList(Calculator calculator){
 
         System.out.println("가장 먼저 저장된 값을 삭제했습니다.");
         System.out.println("현재까지의 결과 값: " + calculator.getResultList());
