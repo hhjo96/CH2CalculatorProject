@@ -1,5 +1,7 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -19,7 +21,7 @@ public class App {
 
         OperatorType op = null; // enum으로 바꾸기
 
-        Calculator calculator = new Calculator();
+        Calculator<Double> calculator = new Calculator<>();
 
         while(true) {
 
@@ -56,7 +58,7 @@ public class App {
             result = calculator.calc(calculator.number1, calculator.number2, operator);
 
             //나누기 0의 경우 따로 처리
-            if (operator.equals("/") && Double.compare(calculator.number2.doubleValue(), 0) == 0) {
+            if (operator.equals("/") && Double.compare(calculator.number2, 0) == 0) {
                 continue;
             } else {
                 System.out.println("현재까지의 결과 값: " + calculator.getResultList());
@@ -68,6 +70,7 @@ public class App {
                 calculator.removeResultList();
                 printRemoveList(calculator);
             }
+
 
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
@@ -102,7 +105,7 @@ public class App {
         System.out.println("입니다. 해당 연산자 중에서 입력해주세요.");
     }
 
-    public static void printRemoveList(Calculator calculator){
+    public static void printRemoveList(Calculator<Double> calculator){
 
         System.out.println("가장 먼저 저장된 값을 삭제했습니다.");
         System.out.println("현재까지의 결과 값: " + calculator.getResultList());
