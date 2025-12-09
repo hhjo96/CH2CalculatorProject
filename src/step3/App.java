@@ -71,7 +71,7 @@ public class App {
                 printRemoveList(calculator);
             }
 
-
+            printBiggerNum(calculator, sc);
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exitMessage = sc.nextLine();
@@ -111,4 +111,24 @@ public class App {
         System.out.println("현재까지의 결과 값: " + calculator.getResultList());
     }
 
+    public static void printBiggerNum(Calculator<Double> calculator, Scanner sc) {
+        System.out.println("입력받은 값보다 큰 결과물을 출력하시겠습니까? (y or n)");
+        String bigMessage = sc.nextLine();
+        if (bigMessage.equalsIgnoreCase("y")) {
+            System.out.print("값을 입력하세요: ");
+            double temp = sc.nextDouble();
+            sc.nextLine();
+            List<Double> pickedResultList =
+                    calculator.getResultList().stream().map(r->r.split("=")[1].trim()).map(Double::parseDouble).toList();
+
+
+            System.out.println(temp + "보다 큰 값을 출력합니다.");
+            for(int i = 0; i < pickedResultList.size(); i++) {
+                if(pickedResultList.get(i) > temp) {
+                    System.out.print(pickedResultList.get(i)+ " ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
