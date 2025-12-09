@@ -46,12 +46,18 @@ public class Calculator<T extends Number>{
         switch (op.getOperator()) {
             case "+":
                 result = num1.doubleValue() + num2.doubleValue();
+                message = num1 + " " + operator + " " + num2 + " = " + result;
+                resultList.add(message);
                 break;
             case "-":
                 result = num1.doubleValue() - num2.doubleValue();
+                message = num1 + " " + operator + " " + num2 + " = " + result;
+                resultList.add(message);
                 break;
             case "*":
                 result = num1.doubleValue() * num2.doubleValue();
+                message = num1 + " " + operator + " " + num2 + " = " + result;
+                resultList.add(message);
                 break;
             case "/":
                 try {
@@ -59,6 +65,8 @@ public class Calculator<T extends Number>{
                         throw new ArithmeticException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                     } else {
                         result = num1.doubleValue() / num2.doubleValue();
+                        message = num1 + " " + operator + " " + num2 + " = " + result;
+                        resultList.add(message);
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -67,9 +75,6 @@ public class Calculator<T extends Number>{
             default:
                 result = 0;
         }
-
-        message = num1 + " " + operator + " " + num2 + " = " + result;
-        resultList.add(message);
 
         return result;
     }
