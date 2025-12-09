@@ -1,6 +1,5 @@
 package step3;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -24,14 +23,16 @@ public class App {
 
         Calculator<Double> calculator = new Calculator<>();
 
-        while(true) {
+        while (true) {
 
             //숫자 입력받기
             System.out.print("첫 번째 숫자를 입력하세요: ");
             try {
                 calculator.number1 = sc.nextDouble();
+                //엔터 지우기
+                sc.nextLine();
             } catch (Exception e) {
-                printOnlyNumbersAndDeleteEnters(sc);
+                printOnlyNumbers(sc);
                 continue;
             }
 
@@ -39,7 +40,7 @@ public class App {
             try {
                 calculator.number2 = sc.nextDouble();
             } catch (Exception e) {
-                printOnlyNumbersAndDeleteEnters(sc);
+                printOnlyNumbers(sc);
                 continue;
             }
 
@@ -93,11 +94,9 @@ public class App {
     }
 
     //메인 함수를 깔끔하게 만들기 위해 별도의 함수로 만들어 보았다.
-    public static void printOnlyNumbersAndDeleteEnters(Scanner sc) {
+    public static void printOnlyNumbers(Scanner sc) {
 
         System.out.println("숫자만 입력해주세요.");
-        //엔터 지우기
-        sc.nextLine();
 
     }
 
@@ -114,7 +113,7 @@ public class App {
     }
 
     //가장먼저 저장된 값 삭제
-    public static void printRemoveList(Calculator<Double> calculator){
+    public static void printRemoveList(Calculator<Double> calculator) {
 
         System.out.println("가장 먼저 저장된 값을 삭제했습니다.");
         System.out.println("현재까지의 결과 값: " + calculator.getResultList());
@@ -123,31 +122,51 @@ public class App {
     //입력받은 값보다 큰 결과만 출력
     public static void printBiggerNum(Calculator<Double> calculator, Scanner sc) {
         System.out.println("입력받은 값보다 큰 결과물을 출력하시겠습니까? (y or n)");
-        String bigMessage = sc.nextLine();
-        if (bigMessage.equalsIgnoreCase("y")) {
-            System.out.print("값을 입력하세요: ");
-            double temp = sc.nextDouble();
-            sc.nextLine();
-            List<Double> pickedResultList =
-                    calculator.getResultList().stream().map(r->r.split("=")[1].trim()).map(Double::parseDouble).toList();
+        String exitMessage = sc.nextLine();
+        if (exitMessage.equalsIgnoreCase("y")) {
+            while (true) {
+                if (!calculator.getResultList().isEmpty()) {
+                    System.out.print("값을 입력하세요: ");
+                    try {
+                        double temp = sc.nextDouble();
+                        sc.nextLine();
+                        List<Double> pickedResultList =
+                                calculator.getResultList().stream().map(r -> r.split("=")[1].trim()).map(Double::parseDouble).toList();
 
 
-            System.out.println(temp + "보다 큰 값을 출력합니다.");
-            for(int i = 0; i < pickedResultList.size(); i++) {
-                if(pickedResultList.get(i) > temp) {
-                    System.out.print(pickedResultList.get(i)+ " ");
+                        System.out.println(temp + "보다 큰 값을 출력합니다.");
+                        for (int i = 0; i < pickedResultList.size(); i++) {
+                            if (pickedResultList.get(i) > temp) {
+                                System.out.print(pickedResultList.get(i) + " ");
+                            }
+                        }
+                        System.out.println();
+                    } catch (Exception e) {
+                        printOnlyNumbers(sc);
+                        sc.nextLine();
+
+                    }
+                } else {
+                    System.out.println("출력할 계산 이력이 없습니다.");
                 }
+                System.out.println("입력받은 값보다 큰 결과물 출력을 계속하시겠습니까? (exit 입력시 종료)");
+                exitMessage = sc.nextLine();
+                if (exitMessage.equalsIgnoreCase("exit")) {
+                    break;
+                }
+
             }
-            System.out.println();
+
         }
     }
+
 
     //연산자를 입력받아 그 연산자로 계산한 계산식을 출력
     public static void printByOp(Calculator<Double> calculator, Scanner sc) {
         System.out.println("연산자 별로 출력하시겠습니까? (y or n)");
         String temp = sc.nextLine();
         if (temp.equalsIgnoreCase("y")) {
-            while(true) {
+            while (true) {
                 System.out.println("출력할 연산자의 종류를 입력해주세요.");
                 String operator = sc.nextLine();
                 switch (operator) {
